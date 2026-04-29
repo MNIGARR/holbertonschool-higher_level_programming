@@ -18,19 +18,27 @@ def text_indentation(text):
     if type(text) is not str:
         raise TypeError("text must be a string")
 
-    # Insert two newlines immediately after the target punctuation marks
-    formatted_text = (
-        text.replace('.', '.\n\n')
-        .replace('?', '?\n\n')
-        .replace(':', ':\n\n')
-    )
+    i = 0
+    while i < len(text):
+        # Skip spaces at the beginning of a line
+        while i < len(text) and text[i] == ' ':
+            i += 1
 
-    # Split the formatted text by newlines to process each line individually
-    lines = formatted_text.split('\n')
+        if i == len(text):
+            break
 
-    # Iterate through each line, strip leading/trailing spaces, and print
-    for i in range(len(lines)):
-        if i == len(lines) - 1:
-            print(lines[i].strip(), end="")
+        # Accumulate characters for the current line
+        line = ""
+        while i < len(text) and text[i] not in ['.', '?', ':']:
+            line += text[i]
+            i += 1
+
+        # If we stopped because of a punctuation mark
+        if i < len(text) and text[i] in ['.', '?', ':']:
+            line += text[i]
+            i += 1
+            print(line.strip())
+            print()
         else:
-            print(lines[i].strip())
+            # Reached the end of the string without hitting punctuation
+            print(line.strip(), end="")
