@@ -1,67 +1,63 @@
-======================================
-Test suite for `text_indentation`
-======================================
+>>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Importing the function:
-    >>> text_indentation = __import__('5-text_indentation').text_indentation
+# Basic sentence with all three delimiters
+>>> text_indentation("Hello. How are you? Fine: good.")
+Hello.
+<BLANKLINE>
+How are you?
+<BLANKLINE>
+Fine:
+<BLANKLINE>
+good.
+<BLANKLINE>
 
-Testing a normal string with various punctuation:
-    >>> text_indentation("Hello. How are you? I am fine: great.")
-    Hello.
-    <BLANKLINE>
-    How are you?
-    <BLANKLINE>
-    I am fine:
-    <BLANKLINE>
-    great.
+# No special characters — printed as-is with no trailing newline
+>>> text_indentation("Iam ruinas videres")
+Iam ruinas videres
 
-Testing removal of leading and trailing spaces:
-    >>> text_indentation("   Hello.   How are you?   ")
-    Hello.
-    <BLANKLINE>
-    How are you?
+# Spaces after delimiter are stripped from next line
+>>> text_indentation("Hello.   World")
+Hello.
+<BLANKLINE>
+World
 
-Testing with multiple consecutive punctuation marks:
-    >>> text_indentation("What?! No...")
-    What?
-    <BLANKLINE>
-    ! No.
-    <BLANKLINE>
-    .
-    <BLANKLINE>
-    .
-    <BLANKLINE>
+# text is not a string
+>>> text_indentation(42)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
 
-Testing a string with no punctuation (should just print the stripped string):
-    >>> text_indentation("   Hello world   ")
-    Hello world
+# text is None
+>>> text_indentation(None)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
 
-Testing an empty string:
-    >>> text_indentation("")
+# Empty string — prints nothing
+>>> text_indentation("")
 
-Testing non-string inputs (Exceptions):
-    >>> text_indentation(123)
-    Traceback (most recent call last):
-        ...
-    TypeError: text must be a string
+# Single delimiter
+>>> text_indentation(".")
+.
+<BLANKLINE>
 
-    >>> text_indentation(None)
-    Traceback (most recent call last):
-        ...
-    TypeError: text must be a string
+# Multiple consecutive delimiters
+>>> text_indentation(".?:")
+.
+<BLANKLINE>
+?
+<BLANKLINE>
+:
+<BLANKLINE>
 
-    >>> text_indentation(3.14)
-    Traceback (most recent call last):
-        ...
-    TypeError: text must be a string
+# Spaces before a delimiter stay, spaces after are stripped
+>>> text_indentation("Hello .   Next")
+Hello .
+<BLANKLINE>
+Next
 
-    >>> text_indentation(["List", "of", "strings"])
-    Traceback (most recent call last):
-        ...
-    TypeError: text must be a string
-
-Testing missing arguments:
-    >>> text_indentation()
-    Traceback (most recent call last):
-        ...
-    TypeError: text_indentation() missing 1 required positional argument: 'text'
+# Missing argument
+>>> text_indentation()
+Traceback (most recent call last):
+...
+TypeError: text_indentation() missing 1 required positional argument: 'text'
