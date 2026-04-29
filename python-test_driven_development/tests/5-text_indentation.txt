@@ -1,0 +1,67 @@
+======================================
+Test suite for `text_indentation`
+======================================
+
+Importing the function:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Testing a normal string with various punctuation:
+    >>> text_indentation("Hello. How are you? I am fine: great.")
+    Hello.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    I am fine:
+    <BLANKLINE>
+    great.
+
+Testing removal of leading and trailing spaces:
+    >>> text_indentation("   Hello.   How are you?   ")
+    Hello.
+    <BLANKLINE>
+    How are you?
+
+Testing with multiple consecutive punctuation marks:
+    >>> text_indentation("What?! No...")
+    What?
+    <BLANKLINE>
+    ! No.
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+
+Testing a string with no punctuation (should just print the stripped string):
+    >>> text_indentation("   Hello world   ")
+    Hello world
+
+Testing an empty string:
+    >>> text_indentation("")
+
+Testing non-string inputs (Exceptions):
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(3.14)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(["List", "of", "strings"])
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+Testing missing arguments:
+    >>> text_indentation()
+    Traceback (most recent call last):
+        ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
