@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
     Module that defines a function to check if an object is
-    an instance of a class that inherited (directly or indirectly) from the specified class."""
+    an instance of a class that inherited (directly or indirectly) from the specified class.
+"""
 
 
 def is_kind_of_class(obj, a_class):
