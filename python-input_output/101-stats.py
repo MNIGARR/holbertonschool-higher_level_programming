@@ -6,7 +6,7 @@ import sys
 def print_stats(total_size, status_counts):
     """
     Prints the accumulated log statistics.
-    
+
     Args:
         total_size (int): The total accumulated file size.
         status_counts (dict): A dictionary containing counts of status codes.
@@ -36,7 +36,7 @@ if __name__ == "__main__":
                     total_size += int(parts[-1])
                 except ValueError:
                     pass
-                
+
                 # Check if the status code (second-to-last element) is valid
                 status = parts[-2]
                 if status in status_counts:
